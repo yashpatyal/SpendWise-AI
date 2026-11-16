@@ -15,13 +15,13 @@ export default function WeeklyChart({ expenses }: WeeklyChartProps) {
   endOfWeek.setDate(startOfWeek.getDate() + 6);
 
   const sortedExpenses = [...expenses].sort((a, b) => {
-    const dateA = new Date(a.customDate || a.createdAt);
-    const dateB = new Date(b.customDate || b.createdAt);
+    const dateA = new Date(a.customDate || a.createdAt || "");
+    const dateB = new Date(b.customDate || b.createdAt || "");
     return dateB.getTime() - dateA.getTime();
   });
 
   const weeklyExpenses = sortedExpenses.filter((expense) => {
-    const expenseDate = new Date(expense.customDate || expense.createdAt);
+    const expenseDate = new Date(expense.customDate || expense.createdAt || "");
     return expenseDate >= startOfWeek && expenseDate <= endOfWeek && expense.type === "expense";
   });
 
@@ -30,7 +30,7 @@ export default function WeeklyChart({ expenses }: WeeklyChartProps) {
     date.setDate(startOfWeek.getDate() + i);
 
     const dayExpenses = weeklyExpenses.filter((expense) => {
-      const expenseDate = new Date(expense.customDate || expense.createdAt);
+      const expenseDate = new Date(expense.customDate || expense.createdAt || "");
       return (
         expenseDate.getDate() === date.getDate() &&
         expenseDate.getMonth() === date.getMonth() &&

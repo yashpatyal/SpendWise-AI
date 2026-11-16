@@ -26,6 +26,10 @@ const expenseSchema = new mongoose.Schema<Expense>(
       required: [true, "Expense amount is required"],
       default: 0,
     },
+    category: {
+      type: String,
+      default: "General",
+    },
   },
   { timestamps: true },
 );

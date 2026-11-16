@@ -6,20 +6,24 @@ export interface User {
 }
 
 export interface Expense {
-  user: User;
+  _id?: string;
+  user?: User | any;
   text: string;
   customDate?: string;
   type: "income" | "expense";
   amount: number;
+  category?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface MongoDocument {
   _id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
-export interface ExpenseDocument extends MongoDocument, Expense {}
+export interface ExpenseDocument extends MongoDocument, Omit<Expense, "_id"> {}
 export interface UserDocument extends MongoDocument, User {}
 export interface UserDataDocument extends MongoDocument, UserData {}
 

@@ -34,8 +34,8 @@ function Home() {
   }
 
   const sortedExpenses = [...(expenses as ExpenseDocument[])].sort((a, b) => {
-    const dateA = new Date(a.customDate || a.createdAt);
-    const dateB = new Date(b.customDate || b.createdAt);
+    const dateA = new Date(a.customDate || a.createdAt || "");
+    const dateB = new Date(b.customDate || b.createdAt || "");
     return dateB.getTime() - dateA.getTime();
   });
 

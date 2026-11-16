@@ -31,12 +31,13 @@ export const createExpense = asyncHandler(async (req: Request, res: Response) =>
     throw new Error("Invalid type");
   }
 
-  const expense = Expense.create({
+  const expense = await Expense.create({
     text: req.body.text,
     amount: req.body.amount,
     type: req.body.type,
     user: (req as AuthenticatedRequest).user.id,
     customDate: req.body.customDate,
+    category: req.body.category || "General",
   });
 
   res.status(200).json(expense);
